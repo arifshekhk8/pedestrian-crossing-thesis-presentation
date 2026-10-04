@@ -1,0 +1,304 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{ulem} %% Underline
+\usepackage{color}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{amsmath}
+
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\topmargin=0pt \textheight=9in \textwidth=6.5in \hoffset=-.6in
+\voffset=-1.7cm
+\parskip=.1in
+
+\def\s{$\bullet$ \hspace{.1in}}
+\def\Tr{^{\rm T}}
+\def\IR{\mathbb R}
+\def\T{{\rm T}}
+\def\inv{^{-1}}
+
+\begin{document}
+\baselineskip=14.4pt
+
+\begin{tabular}{ll}
+\hspace{3.5in} & \today
+\end{tabular}
+
+
+%\noindent Dear Editor, \\
+%CMC-Computers, Materials \& Continua\\
+
+%We would like to extend our sincere appreciation to you and the reviewers for your careful evaluation and constructive feedback on our manuscript entitled “An Optimal Right-Turn Coordination System for Connected and Automated Vehicles at Urban Intersections” (Submission ID: 70222). Your insightful comments have been invaluable in helping us strengthen and refine our work.
+
+%In the revised manuscript, we have incorporated new results that compare our proposed approach with a benchmark method, highlighting its advantages in performance. We have carefully addressed every comment from the Editor and all three reviewers and conducted a thorough review to correct errors, improve clarity, and improve the overall presentation of the document.
+
+%We believe that these substantial revisions have significantly improved the quality, clarity, and contribution of our research. We hope that the current version meets the high standards of CMC – Computers, Materials \& Continua and will be found suitable for publication.
+
+%We are deeply grateful for your time and consideration and look forward to your favorable response.
+
+%\noindent Sincerely,\\
+%The Authors
+%\clearpage
+
+
+%\begin{center}
+%\noindent{\bf Answer to the Comment of Editor}
+%\end{center}
+
+%\textbf{\textit{Comment}:}	
+%\textit{The manuscript includes an overuse of self-citations. We recommend reducing self-referencing.}
+
+%\textbf{Answer:\\} We thank the Editor for pointing this out. In response, we have reduced self-citations (removing [5][11][16] of the original manuscript) and added a new one ([4]) in the revised manuscript. 
+
+%\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\noindent{\bf Answer to the Editor's Comments}
+\end{center}
+%\noindent{\bf Reviewer No.~1}\\
+We sincerely thank the editor for the insightful evaluation, appreciation of the study, and constructive comments with suggestions on our manuscript. 
+\begin{enumerate}	
+\item \textit{\textbf{Comment:\\}	
+1. Novelty Clarification The manuscript should more clearly articulate its novelty relative to recent studies using trajectory-based deep learning for traffic conflict prediction. The current introduction summarizes prior work well, but the specific methodological advances over existing RNN/LSTM-based approaches remain somewhat incremental. Please explicitly clarify: • what is fundamentally new, • why the proposed framework is superior, • and how it advances the state of the art.}
+
+\textbf{Answer:\\} We thank the editor for the insightful comment. In response, we have clarified our novelty relative to recent studies using trajectory-based deep learning for traffic conflict prediction in Subsection 1.1. 
+
+At first, we have included several additional recent studies. Subsequently, we have clarified the research gap, superiority, and novelty of the proposed framework with respect to recent trajectory-based deep learning approaches. The revised portion is given below:
+
+Zhao et al. \cite{zhao2024cnn} proposed a CNN-LSTM-Attention model for near-crash event identification on mountainous roads using naturalistic driving data from Yunnan, China. In their framework, a CNN extracted local spatial features from the driving data, an LSTM tracked temporal dependencies among feature variables, and an attention mechanism dynamically adjusted the weights of the feature parameters. The model was benchmarked against six comparative architectures, achieving an overall accuracy of 98.8\% and a near-crash detection precision of 90.1\%. Hema and Kumar \cite{hema2022levenberg} developed an LM-LSTM model by combining the Levenberg–Marquardt optimization algorithm with LSTM to address the problem of unoptimized weights in standard recurrent networks. 
+They evaluated the approach on the NGSIM trajectory dataset and achieved 95.6\% accuracy for rear-end collision risk prediction. Wang et al. \cite{wang2024spatio} introduced a Spatio-Temporal Transformer Network for simulating conflict risk propagation on freeways using high-resolution vehicle trajectory data. Ahsan et al. \cite{ahsan2025ensemble} investigated rear-end conflicts at Rectangular Rapid Flashing Beacon (RRFB) pedestrian crossings using 52 hours of CCTV video processed through computer vision techniques. Modified time-to-collision (MTTC) and deceleration rate to avoid collision (DRAC) were used as surrogate conflict indicators, and separate time-embedded transformer models were trained for each metric. The ensemble voting framework achieved 86\% recall with a 23\% false alarm rate, outperforming individual models. Ashraf and Dey \cite{ashraf2025rear} analyzed rear-end collision risk in mixed autonomous and human-driven traffic using Lyft and Waymo datasets. They employed a hybrid deep learning framework that combined a Bidirectional Long Short-Term Memory Autoencoder with Extreme Value Theory (EVT).
+Deep learning approaches, including CNN-LSTM-Attention-based architectures for near-crash detection \cite{zhao2024cnn}, spatio-temporal transformer networks for conflict risk propagation simulation using trajectory data \cite{wang2024spatio}, an ensemble time-embedded transformer model for vehicle conflict prediction \cite{ahsan2025ensemble}, and a GNN-LSTM framework for spatiotemporal accident severity modeling \cite{alnowaiser2025computational}, have exhibited strong capability in capturing sequential vehicle interaction patterns from trajectory data. Recent studies have also highlighted Explainable AI (XAI) techniques, including SHAP- and LIME-based interpretation frameworks, to improve the transparency and trustworthiness of safety-critical ITS applications. For example, recent research has investigated SHAP-integrated GNN-LSTM frameworks for traffic accident severity prediction \cite{alnowaiser2025computational}, explainable spatiotemporal incident detection systems \cite{zhai2025toward}, and lightweight real-time XAI architectures for autonomous vehicle applications \cite{tahir2024novel}.
+
+Despite substantial advances in trajectory-based traffic safety analysis, several limitations remain in existing studies. Some studies rely on aggregated traffic variables over fixed temporal intervals, which may obscure short-term vehicle interaction dynamics critical for early conflict detection. In addition, conventional machine learning methods treat observations independently and therefore cannot effectively capture temporal dependencies in continuously evolving driving behavior. Several previous studies also rely on oversampling or undersampling strategies to address class imbalance, potentially distorting the natural distribution of rare unsafe events. Furthermore, many existing studies focus primarily on prediction accuracy, without considering computational efficiency, generalization to unseen traffic environments, and the interpretability required for practical deployment in real-time warning systems.
+To address these limitations, sequential deep learning models are used to capture vehicle motion over time rather than relying solely on conventional machine learning methods. This enables the model to learn how traffic conditions evolve and how unsafe situations develop from normal driving behavior. Unlike Hu et al. \cite{hu2022high} and Li et al. \cite{li2025real}, who relied on aggregated data over intervals, our approach preserves frame-level observations to retain detailed temporal information. Sequences are then created using sliding windows to capture temporal dependencies. This allows the model to learn fine-grained patterns in vehicle behavior and provides a richer, more flexible temporal representation. Moreover, neither oversampling nor undersampling is used to address class imbalance. The proposed framework intentionally avoids such preprocessing. Because non-conflict traffic data far outnumber conflict data in real-world traffic scenarios. The temporal modeling strengths of recurrent neural networks are used here to implicitly handle imbalance. The proposed model is evaluated using a leave-one-subject-out (LOSO) validation scheme across seven folds to provide generalization.
+
+To the best of our knowledge, the integration of fine-grained frame-level temporal sequence modeling without resampling, rigorous cross-environment generalization assessment through LOSO evaluation, and integrated model interpretability using SHAP analysis within a deliberately lightweight architecture has not been jointly explored in rear-end conflict detection research. A Simple RNN with 64 hidden units, trained directly on raw imbalanced sequences, achieves a recall of 99.12\% and an F1-score of 98.48\%, outperforming not only conventional machine learning models but also the more structurally complex LSTM and GRU architectures. Most recent deep learning studies primarily emphasize accuracy, but they either ignore computational efficiency or acknowledge high inference costs.
+In contrast, our proposed model achieves a mean per-sequence inference latency of only 0.20–0.40 ms, demonstrating its suitability for real-time deployment. These findings suggest that high architectural complexity is not necessarily required for short‑horizon traffic conflict detection, as our lightweight Simple RNN achieves sub‑millisecond inference latency (0.20–0.40 ms) alongside high accuracy. A LOSO cross-validation framework across seven geographically distinct expressway segments of the WUT-NGSIM dataset ensures that model performance is evaluated on entirely unseen traffic environments, thereby providing stronger evidence of cross-environment generalization rather than dataset-specific overfitting. \textit{(See E1C1, Pages 3-5)}
+
+
+\item \textit{	\textbf{Comment:\\}	TTC Threshold Justification The choice of a fixed TTC threshold of 4 seconds requires stronger justification. While references are cited, TTC thresholds are highly context-dependent. Please discuss: • why 4 seconds is optimal for this dataset, • whether sensitivity analysis was performed, • and how performance changes under alternative thresholds.}
+
+\textbf{Answer:\\}  We thank the editor for the insightful observation. We agree that clarification for the 4-second threshold is necessary. In response, we have revised the relevant paragraph in Section 1 to address this concern. 
+
+Time-to-collision (TTC) is a widely used surrogate safety measure that estimates the time required for two vehicles to collide if they continue at the same speed in the same direction. A smaller TTC value indicates a higher risk of collision. Previous studies have commonly adopted TTC thresholds ranging from 1.5 to 4 seconds \cite{mahmud2019micro}. However, drivers typically require approximately 1.5 seconds to react and press the brake \cite{sultan2003assessing}, indicating that warning systems should provide sufficient lead time to prevent potential conflicts. In this study, traffic states and conflicts are integrated using a 4-second TTC threshold. Binary safety labels are derived from TTC values in high-resolution trajectory data, with values below the threshold indicating potential unsafe conditions. While advanced driver assistance systems (ADAS) and emergency braking applications often employ smaller TTC thresholds because their primary objective is to detect imminent collision risks and trigger immediate interventions, the proposed framework focuses on proactive rear-end conflict detection using vehicle trajectory data. Consequently, the objective is to identify developing unsafe interactions before they become critical. The selection of the 4s threshold is supported by the trajectory-based traffic safety study of Hu et al. \cite{hu2022high}, who systematically evaluated TTC thresholds of 1.5s, 2s, 3s, and 4s on highways using the Akaike Information Criterion (AIC). Their findings showed that the 4s threshold yielded the highest statistical significance for traffic safety variables and captured a substantially larger number of meaningful conflict cases, 1,238 unsafe instances compared to the 1.5s threshold, making it the most suitable boundary for proactive conflict analysis. Given the relatively high vehicle speeds and rapidly changing car-following dynamics on expressways, an earlier conflict identification threshold is advantageous for detecting safety-critical situations before they become irreversible. Therefore, a TTC threshold of 4s is considered appropriate for the proposed trajectory-based rear-end conflict detection framework. \textit{(See E1C2, Page 2)}
+
+
+\item \textit{	\textbf{Comment:\\} Class Imbalance Handling The manuscript emphasizes that no oversampling or undersampling was used. However, the rationale that temporal modeling alone sufficiently handles imbalance should be further substantiated. Please consider: • adding ablation experiments, • comparing with weighted loss functions, • or reporting additional imbalance-sensitive metrics such as AUC-PR, MCC, or balanced accuracy.  }
+
+\textbf{Answer:\\} We thank the editor for this valuable suggestion. To further substantiate the claim that temporal modeling can effectively handle class imbalance, we have conducted additional comparative experiments using the same Simple RNN architecture under three settings: (i) original imbalanced dataset, (ii) class-weighted loss, and (iii) oversampling. We have also added the Precision–Recall (PR) curves analysis on the imbalanced dataset. The revised portion is added in Section 4.
+
+Temporal modeling using the Simple RNN effectively captures the evolution of driving patterns well under class-imbalanced conditions. To demonstrate this capability, the performance of the proposed imbalanced dataset is compared with oversampling and class-weighting strategies using the same Simple RNN architecture. As illustrated in Figure \ref{imbalanced}, the Simple RNN model trained on the original imbalanced dataset achieves the highest F1-score (98.48\%) and precision (97.86\%), while maintaining very high recall (99.12\%). Applying class weighting slightly increases recall to 99.62\%; however, this improvement comes at the expense of lower precision and F1-score. Similarly, oversampling results in a lower F1-score compared with the original imbalanced training strategy. Unlike oversampling approaches that may distort the original traffic distribution or class weighting methods that may bias optimization toward the minority class, the proposed framework preserves realistic traffic behavior while still achieving excellent unsafe-event detection performance. These findings suggest that the temporal sequence modeling capability of the Simple RNN is sufficient to effectively learn driving patterns directly from naturally imbalanced trajectory data. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{imbalanced_dataset.eps}
+\caption{Comparison of Simple RNN performance on the original imbalanced dataset, class-weighting, and oversampling strategies in terms of accuracy, precision, recall, and F1-score.\label{imbalanced}}
+\end{figure}
+
+The Precision--Recall (PR) curves for all seven LOSO folds are shown in Figure \ref{PR_curve} using the proposed framework on the imbalanced dataset. The curves remain concentrated near the upper-right corner of the plot, with PR-AUC values ranging from 0.999 to 1.000 across all expressways. This indicates that the proposed Simple RNN maintains both extremely high precision and high recall despite the severe class imbalance present in the trajectory dataset. The near-perfect PR-AUC values demonstrate that the proposed temporal sequence modeling framework effectively captures unsafe traffic patterns without requiring oversampling, undersampling, or weighted loss functions. The consistency of the curves across all LOSO folds further confirms that the model generalizes well to unseen expressway environments while preserving strong minority-class detection capability. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth]{PR_curve.eps}
+\caption{Precision–Recall curves of the proposed Simple RNN framework across all LOSO expressway folds, demonstrating robust minority-class detection performance on the imbalanced dataset.\label{PR_curve}}
+\end{figure}
+\textit{(See E1C3, Pages 12-13, 17-18)}
+
+\item \textit{	\textbf{Comment:\\} Hyperparameter Selection The manuscript lacks sufficient detail regarding hyperparameter tuning for both classical ML and deep learning models. Please clarify: • how hyperparameters were selected, • whether grid/random/Bayesian optimization was used, • and whether all models received comparable optimization effort.}
+
+\textbf{Answer:\\} We thank the editor for the valuable suggestion. In response, we have modified Section 3.
+
+Hyperparameters for both machine learning and deep learning models have been selected empirically based on preliminary experiments. Exhaustive optimization methods such as grid search, random search, or bayesian optimization have not been employed. For fair comparison, the Simple RNN, LSTM, and GRU models are all evaluated under similar training settings. \textit{(See E1C4, Page 11)}
+
+We want to add that a lightweight single-layer architecture is intentionally adopted to ensure low inference latency, making the model suitable for real-time deployment. For classical machine learning models, we use Scikit-learn library with default parameter settings.
+
+  
+\item \textit{	\textbf{Comment:\\}	Statistical Reliability The reported performance differences between GRU, LSTM, and Simple RNN are relatively small. Please provide: • statistical significance analysis, • confidence intervals, • or repeated experimental runs to support the conclusion that Simple RNN is definitively superior. 	}
+
+\textbf{Answer:\\} We thank the editor for this valuable suggestion. To address the concern, we rely on repeated evaluations under the Leave-One-Subject-Out (LOSO) cross-validation framework. We have added two more tables in Section 4.
+
+Sequential deep learning models, including Simple RNN, LSTM, and GRU, are evaluated under identical settings using different sliding-window sequence lengths of 15, 30, 45, and 60 timesteps. Across all sequence lengths, the Simple RNN consistently achieves higher accuracy and F1-score than both LSTM and GRU, as demonstrated in Table \ref{tab:seq_length}. These consistent results indicate that the superiority of the Simple RNN is stable and not due to random experimental variation.
+
+\begin{table}[H]
+\caption{Performance comparison of sequential deep learning models across different sequence lengths.\label{tab:seq_length}}
+\centering
+\begin{tabularx}{\textwidth}{CCCCC}
+\toprule
+\textbf{Sequence Length} & \textbf{Performance Metrics} & \textbf{Simple RNN} & \textbf{LSTM} & \textbf{GRU} \\
+\midrule
+\multirow{4}{*}{15}
+ & Accuracy  & 99.80\% & 99.74\% & 99.70\% \\
+ & Precision & 98.48\% & 96.64\% & 97.92\% \\
+ & Recall    & 97.57\% & 98.27\% & 96.46\% \\
+ & F1-score  & 97.99\% & 97.43\% & 97.11\% \\
+\midrule
+\multirow{4}{*}{30}
+ & Accuracy  & 99.84\% & 99.83\% & 99.79\% \\
+ & Precision & 97.86\% & 98.12\% & 97.58\% \\
+ & Recall    & 99.12\% & 98.59\% & 98.54\% \\
+ & F1-score  & 98.48\% & 98.35\% & 98.03\% \\
+\midrule
+\multirow{4}{*}{45}
+ & Accuracy  & 99.83\% & 99.77\% & 99.76\% \\
+ & Precision & 97.43\% & 98.68\% & 97.75\% \\
+ & Recall    & 99.28\% & 96.68\% & 97.62\% \\
+ & F1-score  & 98.34\% & 97.63\% & 97.65\% \\
+\midrule
+\multirow{4}{*}{60}
+ & Accuracy  & 99.83\% & 99.79\% & 99.80\% \\
+ & Precision & 98.39\% & 98.02\% & 98.87\% \\
+ & Recall    & 98.15\% & 97.91\% & 97.30\% \\
+ & F1-score  & 98.25\% & 97.96\% & 98.07\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Table~\ref{tab:inference_efficiency} presents the fold-wise inference time, number of test sequences, and mean per-sequence latency of the Simple RNN, LSTM, and GRU models under the LOSO cross-validation framework. The per-sequence latency is computed by dividing the total inference time of each fold by the corresponding number of test sequences.
+\begin{equation}
+\text{Latency}_{ms}
+=
+\frac{\text{Inference Time}_{s}}
+{\text{Number of Test Sequences}}
+\times 1000
+\label{eq:latency}
+\end{equation}
+The results show that the Simple RNN consistently achieves the lowest inference latency (0.20--0.40 ms per sequence), while GRU exhibits the highest inference latency (0.46--1.59 ms per sequence), demonstrating the computational efficiency of the proposed lightweight Simple RNN framework for real-time traffic safety applications.
+
+\begin{table}[ht]
+\centering
+\caption{Fold-wise inference time, number of test sequences, and mean per-sequence latency 
+for Simple RNN (sequence length 30), LSTM (sequence length 30), and GRU (sequence length 60) 
+under the LOSO cross-validation framework.}
+\label{tab:inference_efficiency}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l ccc ccc ccc}
+\hline
+\multirow{2}{*}{\textbf{Fold}} 
+  & \multicolumn{3}{c}{\textbf{Simple RNN}} 
+  & \multicolumn{3}{c}{\textbf{LSTM}} 
+  & \multicolumn{3}{c}{\textbf{GRU}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+  & \textbf{Time (s)} & \textbf{Sequences} & \textbf{Latency (ms)} 
+  & \textbf{Time (s)} & \textbf{Sequences} & \textbf{Latency (ms)} 
+  & \textbf{Time (s)} & \textbf{Sequences} & \textbf{Latency (ms)} \\
+\hline
+B & 20.743 & 66{,}079 & 0.3139 & 20.834 & 66{,}079 & 0.3153 & 30.312 & 66{,}049 & 0.4589 \\
+C &  5.252 & 14{,}625 & 0.3591 &  5.292 & 14{,}625 & 0.3618 & 10.409 & 14{,}595 & 0.7132 \\
+D &  5.316 & 24{,}325 & 0.2185 &  7.848 & 24{,}325 & 0.3226 & 20.652 & 24{,}295 & 0.8500 \\
+E & 20.735 & 68{,}166 & 0.3042 & 41.152 & 68{,}166 & 0.6037 & 82.270 & 68{,}136 & 1.2074 \\
+F & 20.746 & 62{,}000 & 0.3346 & 20.688 & 62{,}000 & 0.3337 & 82.277 & 61{,}970 & 1.3277 \\
+H &  8.037 & 40{,}310 & 0.1994 & 13.399 & 40{,}310 & 0.3324 & 41.230 & 40{,}280 & 1.0236 \\
+I & 10.467 & 25{,}971 & 0.4030 & 10.427 & 25{,}971 & 0.4015 & 41.193 & 25{,}941 & 1.5879 \\
+\hline
+\textbf{Range} & \multicolumn{2}{c}{} & \textbf{0.20--0.40} 
+               & \multicolumn{2}{c}{} & \textbf{0.32--0.60} 
+               & \multicolumn{2}{c}{} & \textbf{0.46--1.59} \\
+\hline
+\end{tabular}%
+}
+\end{table}
+\textit{(See E1C5, Pages 14-15, 17)}
+
+\item \textit{	\textbf{Comment:\\}Real-Time Deployment Claims The paper repeatedly claims real-time applicability; however, deployment constraints are only partially analyzed. Please expand the discussion on: • latency requirements, • hardware dependence, • scalability, • and potential integration into real ITS infrastructure. }
+
+\textbf{Answer:\\} We thank the editor for this valuable suggestion. In response, we have added Subsection 5.3 to provide a clearer analysis of real-time deployment considerations, including latency, hardware requirements, scalability, and integration into Intelligent Transportation System (ITS) infrastructure.
+
+The real-time deployment of the proposed method involves several considerations, including standalone implementation and potential integration with the ITS infrastructure to enhance its scope further. The proposed framework requires basic sensing hardware, such as a lidar or depth camera, to measure the relative state of the preceding vehicle, a capability currently used in widely adopted adaptive cruise control (ACC) or emerging automated driving systems, and usually with very low latency in the order of a few milliseconds. 
+However, although the model inference latency is sub-millisecond (0.20–0.40 ms per sequence), the total end-to-end system latency, including sensor sensing, data preprocessing, model inference, and vehicle control actuation delays or warnings, requires further investigation through hardware-in-the-loop and real-world deployment studies, which are kept out of the scope of this study.
+For a human driver, the proposed system can serve as a driving assistant for collision avoidance, with an acceptable human interface that can promptly deliver warnings. To ensure the acceptability of such a warning system, it needs to be adaptive to users' skills, fitness, or driving behavior by tuning parameters or safety thresholds, a possibility that warrants further investigation. The proposed conflict detection framework can also serve as a proactive input to Adaptive Cruise Control (ACC) systems, in addition to passive driver warnings. When the model predicts an unsafe condition, it may support adaptive speed regulation or following-distance adjustment before the situation becomes critical. 
+With emerging vehicular communication and roadside units within the Intelligent Transportation System (ITS) infrastructure, the proposed model can predict conflicts more precisely and communicate to help avoid multiple-vehicle collisions and to support network-level traffic safety monitoring. \textit{(See E1C6, Page 20)}
+
+%https://www.mitsubishi-motors.ca/en/milife/what-is-adaptive-cruise-control--how-acc-works
+\item \textit{	\textbf{Comment:\\}  Limitations and Generalization The current discussion section should more explicitly acknowledge limitations, including: • reliance on a single dataset, • expressway-only scenarios, • fixed TTC thresholds, • and lack of external validation. A dedicated limitations subsection would strengthen the manuscript.}
+
+\textbf{Answer:\\} We thank the editor for this suggestion. Limitations have been added in Subsection 5.2.
+
+Even after demonstrating promising performance, our proposed framework faces several limitations. The current study uses trajectory data from seven expressway scenarios in the WUT-NGSIM dataset. A leave-one-subject-out (LOSO) validation strategy is employed to improve robustness across the seven expressway scenarios, enabling evaluation on unseen driving subjects and reducing subject-specific bias. However, the framework has not yet been validated using completely independent external datasets collected under different traffic and sensing conditions.
+In addition, the experiments focus on expressway traffic scenarios. Therefore, the proposed framework has not been evaluated in urban intersections, mixed-traffic environments, or heterogeneous roadway networks. 
+Furthermore, the conflict identification process relies on TTC-based surrogate safety measures, which assume constant velocity and a single preceding vehicle interaction. TTC may not fully capture complex driving maneuvers, driver intention, or rapidly changing traffic dynamics. 
+The use of fixed TTC thresholds may also limit adaptability across varying traffic densities and environmental conditions. Furthermore, the study focuses on recurrent neural network architectures and does not evaluate transformer-based temporal models, which may capture temporal dependencies more effectively. Future work will focus on evaluating the framework across multiple external datasets and roadway environments, incorporating adaptive or context-aware conflict thresholds, and investigating transferability across diverse traffic scenarios. Future studies will also examine transformer-based architectures and multimodal traffic sensing to improve robustness for real-world ITS deployments. \textit{(See E1C7, Page 20)}
+
+\item \textit{	\textbf{Comment:\\} Minor Comments 1. Several grammatical and stylistic issues remain throughout the manuscript and require professional English editing. 2. Figure captions should be more self-contained and descriptive. 3. The manuscript should report the complete feature list used for model training in tabular form. 4. Please clarify whether sequence overlap due to stride = 1 may introduce temporal leakage or dependency effects. 5. The term “unsafe” may be interpreted ambiguously. Consider clarifying whether this refers to conflict-prone or TTC-critical conditions rather than actual collision events. 6. Some references are very recent but others are relatively limited in scope. Please strengthen the literature review with additional recent studies on: • sequence learning for traffic safety, • explainable AI in ITS, • and real-time intelligent transportation systems. 7. Please carefully revise formatting inconsistencies, spacing issues, and notation presentation throughout the manuscript.}
+
+\textbf{Answer:\\} We thank the editor for the helpful comments. We have addressed each point as follows:
+
+1. We have tried our best to address grammatical and stylistic inconsistencies. 
+
+2. Several figure captions have been changed in the manuscript to make them descriptive. \textit{(See Figure captions marked in red color, Pages 6, 7, 16-18 )}
+
+3. The complete feature list has been added in Subsection 2.2. The extracted trajectory-based features used for model training are summarized in Table~\ref{tab:feature_description}. The feature set captures the spatial positions and kinematic properties of both the host and preceding vehicles, including vehicle coordinates, velocity, acceleration, and inter-vehicle distance.
+
+\begin{table}[H]
+\caption{Trajectory-based input features extracted from the WUT-NGSIM dataset, comprising vehicle position, velocity, acceleration, and inter-vehicle distance information used for model development.\label{tab:feature_description}}
+
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Feature} & \textbf{Description} \\
+\hline
+
+\texttt{center\_x} &
+Longitudinal position of the target vehicle center. \\
+\hline
+
+\texttt{center\_y} &
+Lateral position of the target vehicle center. \\
+\hline
+
+\texttt{calculated\_v} &
+Instantaneous velocity of the target vehicle. \\
+\hline
+
+\texttt{calculated\_a} &
+Instantaneous acceleration of the target vehicle. \\
+\hline
+
+\texttt{xp} &
+Longitudinal position of the preceding vehicle relative to the target vehicle. \\
+\hline
+
+\texttt{yp} &
+Lateral position of the preceding vehicle relative to the target vehicle. \\
+\hline
+
+\texttt{xpVelocity} &
+Velocity of the preceding vehicle. \\
+\hline
+
+\texttt{xpAcceleration} &
+Acceleration of the preceding vehicle. \\
+\hline
+
+\texttt{Distance} &
+Relative inter-vehicle distance between the target vehicle and the preceding vehicle. \\
+\hline
+
+\end{tabularx}
+\end{table}
+\textit{(See E1C8(3), Page 8)}
+
+4. We have clarified whether sequence overlap due to stride = 1 may introduce temporal leakage or dependency effects in Section 3. Sequences are generated using a sliding window approach with stride = 1, where consecutive sequences overlap by all timesteps except the last one. This overlap is intentionally used to preserve detailed temporal information from continuous vehicle movements and interactions. Although neighboring sequences within the same dataset partition are temporally related, this does not cause temporal leakage between training and testing data. Sequence generation is performed separately for the training and testing sets, and no sequence contains samples from both partitions. In addition, the LOSO evaluation strategy further reduces the possibility of information leakage by keeping the test expressway completely separate from the training expressways. Therefore, the model is always evaluated on unseen expressway data that are not used during training. \textit{(See E1C8(4), Page 10)}
+
+5. We have added the meaning of unsafe in Subsection 2.2, which is Dataset Preparation. In this study, the term “unsafe” refers to potential rear-end conflict conditions rather than actual collision events. \textit{(See E1C8(5), Page 7)}
+
+6. We have strengthened the literature review with additional recent studies in Subsection 1.1.
+
+Zhao et al. \cite{zhao2024cnn} proposed a CNN-LSTM-Attention model for near-crash event identification on mountainous roads using naturalistic driving data from Yunnan, China. In their framework, CNN extracted local spatial features from the driving data, LSTM tracked temporal dependencies among feature variables, and an attention mechanism dynamically adjusted the weights of feature parameters. The model was benchmarked against six comparative architectures, achieving an overall accuracy of 98.8\% and a near-crash detection precision of 90.1\%. Hema and Kumar \cite{hema2022levenberg} developed an LM-LSTM model by combining the Levenberg–Marquardt optimization algorithm with LSTM to address the problem of non-optimized weights in standard recurrent networks, evaluating the approach on the NGSIM trajectory dataset and achieving an accuracy of 95.6\% for rear-end collision risk prediction. Wang et al. \cite{wang2024spatio} introduced a Spatio-Temporal Transformer Network for simulating conflict risk propagation on freeways using high-resolution vehicle trajectory data. Ahsan et al. \cite{ahsan2025ensemble} investigated rear-end conflicts at Rectangular Rapid Flashing Beacon (RRFB) pedestrian crossings using 52 hours of CCTV video processed through computer vision techniques. Modified Time-to-Collision (MTTC) and Deceleration Rate to Avoid Collision (DRAC) were used as surrogate conflict indicators, and separate Time-Embedded Transformer models were trained for each metric. The ensemble voting framework achieved 86\% recall with a 23\% false alarm rate, outperforming individual models. Ashraf and Dey \cite{ashraf2025rear} analyzed rear-end collision risk in mixed autonomous and human-driven traffic using Lyft and Waymo datasets. They employed a hybrid deep learning framework based on a Bidirectional Long Short-Term Memory Autoencoder combined with Extreme Value Theory (EVT). Deep learning approaches, including CNN-LSTM-Attention-based architectures for near-crash detection \cite{zhao2024cnn}, spatio-temporal transformer networks for conflict risk propagation simulation using trajectory data \cite{wang2024spatio}, an ensemble time-embedded transformer model for vehicle conflict prediction \cite{ahsan2025ensemble}, and a GNN-LSTM framework for spatiotemporal accident severity modeling \cite{alnowaiser2025computational}, have exhibited strong capability in capturing sequential vehicle interaction patterns from trajectory data. Recent studies have also highlighted Explainable AI (XAI) techniques, including SHAP- and LIME-based interpretation frameworks, to improve the transparency and trustworthiness of safety-critical ITS applications. For example, recent research has investigated SHAP-integrated GNN-LSTM frameworks for traffic accident severity prediction \cite{alnowaiser2025computational}, explainable spatiotemporal incident detection systems \cite{zhai2025toward}, and lightweight real-time XAI architectures for autonomous vehicle applications \cite{tahir2024novel}. \textit{(See E1C8(6), Pages 3-4)}
+
+7. The manuscript has been carefully revised to fix spacing issues, improve notation consistency, and ensure uniform formatting throughout the paper.
+\end{enumerate}	
+
+%\clearpage
+\vspace{1.5cm}  % adds 1.5 cm of vertical space
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\reftitle{References}
+\bibliographystyle{plain}
+\bibliography{references.bib}
+
+\end{document}
+
+
