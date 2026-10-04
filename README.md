@@ -10,15 +10,17 @@ The active manuscript title is in [manuscript/final.tex](manuscript/final.tex). 
 
 ## Start here
 
-Rezwoan, use [PRESENTATION_PROMPT.md](PRESENTATION_PROMPT.md) as the assignment for Claude Code. It directs Claude Code to act as a professional academic presentation designer and build the finished deck from the manuscript. The brief includes the research narrative, suggested slide structure, source figure map, scientific accuracy rules, design direction, and final review steps.
+Rezwoan, use [PRESENTATION_PROMPT.md](PRESENTATION_PROMPT.md) as the assignment for Claude Code. It directs Claude Code to build the finished deck from the manuscript using the supplied IUBAT PowerPoint template. The brief includes cover details for both presenters, the institutional section order, scientific accuracy rules, and final review steps.
 
-Claude Code should create the full editable thesis defence deck and matching PDF, first writing a plan and then checking every slide. Place the finished deck, plan, and review notes under presentation/.
+Claude Code should create the full editable thesis defence deck and matching PDF, first writing a plan and then checking every slide. Place the finished files under presentation/.
 
 ## Contents
 
 | Path | Contents |
 | --- | --- |
 | PRESENTATION_PROMPT.md | Detailed presentation-building instructions |
+| Thesis Final Defense Presentation Template-DAS (2).pptx | Institutional slide template; use its 4:3 layouts and branding |
+| BCSE_Thesis_Template IUBAT-DAS.docx | Institutional thesis document template; optional wording reference |
 | manuscript/final.tex | Authoritative current manuscript |
 | manuscript/references.bib | Source references |
 | manuscript/figures/ | Original research figures |

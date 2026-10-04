@@ -1,108 +1,367 @@
-# Claude Code brief: design the thesis defence presentation
+You are an academic presentation designer, scientific editor, and research-methodology reviewer. Create a complete, professional thesis final-defence presentation using the manuscript and institutional PowerPoint template in this repository.
 
-You are a **senior academic presentation designer and scientific editor**. Rezwoan is using Claude Code to create Md. Arif Shekh's final thesis defence presentation from this repository. Take responsibility for the complete result: study the manuscript, shape a clear narrative, design and build the slides, export the PDF, and review every slide. Deliver a finished presentation, not an outline, sample, or template.
+Your task is to produce the finished, editable presentation and matching PDF. Begin with a clear plan, then carry out the work, verify the scientific content, inspect every rendered slide, and correct problems before delivery.
 
-## Assignment
+## 1. Inputs and priority
 
-- **Audience:** a thesis defence committee and research audience. Slides must support a spoken presentation, with readable evidence and concise copy.
-- **Format:** 16:9 widescreen, **20–25 slides total**, including title, references, backups, and closing if used.
-- **Title:** **Temporal Validity and Sampling Bias in Pedestrian Crossing Prediction: A Multi-Dataset Audit and Controlled Evaluation**.
-- **Presenter:** Md. Arif Shekh, Department of Computer Science and Engineering, International University of Business Agriculture and Technology (IUBAT), Dhaka, Bangladesh.
-- **Supervisor:** Nusrath Tabassum. The paper's other authors are Md Abdus Samad Kamal and Kou Yamada; do not label them as supervisors.
-- **Core argument:** a crossing predictor needs pre-crossing observations. Event anchoring removes crossing frames from the tested windows, yet class-dependent sampling phase remains. A phase-matched control changes the apparent benefit of ego speed and the statistical evidence for model-family differences.
+The repository provides:
 
-The ZIP filename uses an older study title. `manuscript/final.tex` is authoritative. Do not invent a student ID, degree, defence date, university logo, or other missing identity detail.
+1. The original Overleaf manuscript ZIP in `archive/`, associated with manuscript ID **mti-4601011**. The active source is already extracted under `manuscript/`; start with `manuscript/final.tex` and `manuscript/references.bib`.
+2. `Thesis Final Defense Presentation Template-DAS (2).pptx`, the institutional slide template.
+3. `BCSE_Thesis_Template IUBAT-DAS.docx`, an institutional thesis document template. Use it only as optional background for institutional wording; the PowerPoint controls the slide design.
 
-## Read the sources before designing
+Use the files for these purposes:
 
-1. Read the **entire active manuscript** in `manuscript/final.tex`, including its abstract, tables, captions, Discussion, Limitations, and Conclusions. Active text in red or blue revision commands counts; commented-out LaTeX does not.
-2. Read `manuscript/references.bib` and inspect the original files in `manuscript/figures/`. Determine manuscript figure numbers from `final.tex`, not filenames. If feasible, compile the manuscript to confirm section, figure, and table numbers; do not edit its research content to solve a local build issue.
-3. Use the manuscript as the source of truth for claims, statistics, protocols, and terminology. `manuscript/Rev.Editor comment.tex` and `manuscript/cover_letter.tex` are background only. The original ZIP in `archive/` is preserved for reference.
-4. This repository contains manuscript materials, not the training implementation, checkpoints, or additional experiment outputs. Do not suggest those exist.
+- **The active manuscript is the scientific source of truth:** research questions, methods, figures, tables, numerical results, statistical procedures, interpretations, limitations, and bibliography.
+- **The PowerPoint template controls the presentation’s design and section structure:** dimensions, branding, layouts, typography, cover arrangement, headers, footers, references format, and closing slides.
+- **My personal details below control the cover information**, even where the manuscript’s author list differs.
+- My explicit requirements in this prompt override conflicting example text or guidance inside the supplied source files.
 
-## Art direction and writing
+Start from a duplicate of the actual PowerPoint template. Preserve all supplied source files unchanged. Do not use a previous AI-generated presentation as the scientific source or visual template.
 
-Design a coherent story: **why timing matters → what was audited → how sampling was corrected → what timing difference remained → how the controlled results changed → what researchers should report**. Give each slide one clear point. Use descriptive titles; on results slides, a concise evidence-based takeaway title can help the audience understand the finding.
+The template contains eight example and guidance slides. It is a scaffold to expand, rather than a requirement to produce only eight slides.
 
-Use a white canvas, near-black text, one restrained navy or blue accent, and subtle grey rules. Preserve scientific colours in the source figures. Choose one professional font family and a consistent grid with generous whitespace. Aim for titles around 30–36 pt and body text around 20–26 pt; citations and labels can be smaller but must remain legible when projected. The result should look like a carefully designed research talk, not a stock template.
+## 2. My cover information
 
-Choose the composition to fit the content: full-width research figures where the figure is the evidence, editable tables where exact values matter, and simple process diagrams where steps need explanation. Vary layouts across the deck without adding decorative cards, stock photos, generic icons, gradients, or flashy transitions. Align labels with what they explain. Shorten or rearrange copy before reducing font size. Do not paste manuscript paragraphs onto slides.
+Use these details exactly:
 
-Keep slide text, new diagrams, tables, and equations editable. Preserve source figures at high quality and natural proportions. Never stretch an image or crop away a data panel, axis, legend, annotation, or important context. Use vector insertion for PDF figures when possible, otherwise render at high resolution. Do not invent curves, chart values, confidence intervals, or empirical images.
+**Prepared by**
 
-Use concise author–year citations on relevant slides, with full reference details in speaker notes or a compact references section if it fits the slide limit. Write clear scholarly English, define technical terms when needed, and keep speaker notes useful for Arif's delivery rather than repeating slide text.
+- **Md. Arif Shekh** — **ID: 23103022**
+- **Md. Riduan Islam** — **ID: 22103414**
 
-## Content storyboard
+**Supervised by**
 
-This **25-slide outline is a content map, not a layout template**. You may combine or rearrange slides 6–8 and 14–25 to improve pacing if the final deck stays within 20–25 slides and covers every essential result. Keep slides 1–5 in this order. In Methods, show the full pipeline and explain each process **before** its corresponding source figure. The complete Figures 2, 3, and 4 must appear.
+- **Nusrath Tabassum**
+- **Associate Professor**
+- **CSE Department, IUBAT**
 
-| Suggested slide | Purpose and evidence |
-| --- | --- |
-| 1. Title | Current full title, presenter, department/university, supervisor. A compact paper-author line is optional. |
-| 2. Road safety and problem | Figure 1 and the cited global/U.S. context, followed by the specific risk of crossing frames or unequal sampling phase in nominally pre-crossing inputs. Keep years distinct. |
-| 3. Research questions | Frame-level validity across PIE, JAAD, and IDD-PeD; remaining class-dependent timing and the measured value of ego speed; consistency of four model families across protocols. |
-| 4. Contributions | Frame-level audit; event anchoring and training-derived phase control on PIE; box-only versus box-plus-speed comparison; repeated, statistically evaluated model-family comparison. |
-| 5. Roadmap | Convert the **last active Introduction paragraph** into Related Work, Materials and Methods, Experimental Settings, Results, Discussion and Limitations, Conclusions. |
-| 6–8. Related Work | Distinguish latent intention from observable action. Cover JAAD/PIE and pre-event evaluation, restricted versus rich inputs, temporal models, evaluation reliability, and the precise sampling gap. Cite actual studies in the manuscript. |
-| 9. Pipeline | Show **all of Figure 2**: annotated track, pre-event window, boxes and speed, training-derived standardization, one model per run, crossing probability, and decision. |
-| 10. Dataset and split process | PIE is the controlled benchmark; JAAD is a temporal audit; IDD-PeD supports audit and exploratory external evaluation. Explain PIE recording-set partitioning before window generation. |
-| 11. Dataset examples | Show **all of Figure 3**, retaining PIE, JAAD, and IDD-PeD panels, blurred faces, and labels. Box colours indicate annotated outcomes, not predictions. |
-| 12. Sampling process | Explain historical track-end extraction, event anchoring, phase-matched negative sampling, and the frame-level contamination check. Make the training-only source of the phase distribution clear. |
-| 13. Sampling figure | Show **all of Figure 4**, both panels and both classes. Explain the 16-frame window and distinct 30–60-frame prediction horizon. |
-| 14. Inputs | Explain `[x1, y1, x2, y2, v_ego]`, the 16 × 5 and 16 × 4 conditions, frame alignment, and training-derived standardization. |
-| 15. Models and evaluation | Compare BiLSTM, bidirectional GRU, bidirectional vanilla RNN, and Transformer. Show shared data and evaluation; capacities and validation-selected configurations are not equal. |
-| 16. Experimental settings | One readable setup slide with hardware, window/stride/horizon, split sizes, training, five seeds, validation-selected thresholds, clustered bootstrap, and Holm correction. Put secondary detail in notes. |
-| 17. Temporal audit | Use `tab:temporal-audit` to compare original and corrected windows across all three datasets, keeping denominators and extraction rules explicit. |
-| 18. Event-anchored models | Use `tab:model-results` to compare all four families, distinguish the leader by metric, and show the corrected architecture contrasts. |
-| 19. Residual timing | Use Figure 5 to show that event anchoring removed observed crossing frames but left a class-dependent timing signal; phase matching reduced it. |
-| 20. Phase-matched model results | Use `tab:phase-control` and Figure 6 to show performance under both protocols and the change in supported architecture contrasts. |
-| 21. Ego-speed ablation | Use `tab:speed-phase` to compare box-only and box-plus-speed under both protocols. Distinguish descriptive mean differences from inferential comparisons. |
-| 22. Qualitative demonstration | Use Figure 7 for detector → ByteTrack → tracked boxes and recorded speed → frozen within-family ensemble. Clearly label the evidence qualitative. |
-| 23. Discussion | Answer the research questions. Explain why checking crossing-frame validity and checking remaining class-dependent timing are separate steps. |
-| 24. Limitations and future work | Include PIE-only controlled phase comparison, incomplete timing alignment, changed eligible populations, restricted inputs, outcome versus intention, and exploratory external transfer. Use manuscript-grounded future work. |
-| 25. Conclusions and questions | Three concise, evidence-bound conclusions and a simple Questions line. Do not add a filler thank-you slide. |
+**Prepared for**
 
-### Original figure map
+- Thesis Defense Committee
+- Department of Computer Science and Engineering
+- IUBAT
 
-| Manuscript figure | Source file | Handling |
-| --- | --- | --- |
-| Figure 1 | `manuscript/figures/fig1_pedestrian_statistics.png` | Keep global and U.S. years and contexts separate. |
-| Figure 2 | `manuscript/figures/fig2_method.png` | Show the **complete** pipeline. |
-| Figure 3 | `manuscript/figures/fig7_scenes.png` | Show all dataset panels; preserve blurring. |
-| Figure 4 | `manuscript/figures/fig3_anchors.pdf` | Show both panels, classes, and timing relationships. `final.tex` uses this file; do not substitute `fig3_anchors__.pdf`. |
-| Figure 5 | `manuscript/figures/fig4_phase_separation.png` | Show both protocols; identify the timing-distance diagnostic. |
-| Figure 6 | `manuscript/figures/fig5_curves.pdf` | Keep ROC and PR labels accurate. Its areas come from five-seed probability ensembles, not the per-seed means in the tables. If the full figure is too dense, show complete selected panels and include the full figure in supporting material. |
-| Figure 7 | `manuscript/figures/fig6_demo.png` | Preserve panel labels; identify the demonstration as qualitative. |
+**Institution**
 
-## Scientific facts to protect
+IUBAT—International University of Business Agriculture and Technology
 
-- The Introduction cites approximately **1.16 million** annual road traffic deaths and says road traffic injuries are the leading cause of death for ages **5–29**. Pedestrians accounted for **23%** of global road deaths in **2021**, approximately **274,000**. Do not calculate new statistics from different reporting years.
-- Exclude PIE pedestrians with crossing label −1. Use observed crossing outcome rather than `intention_prob`. Partition recording sets **before** generating windows: train on **01, 02, 04**; validate on **05, 06**; test on **03**. Keep one pedestrian's windows in one partition and retain the split across comparisons.
-- Use **16 consecutive observed frames**, stride **8**, with the final observed frame **30–60 frames** before the crossing reference, about **1–2 seconds at 30 fps**. A window is contaminated if even one input frame is annotated as crossing. Do not confuse observation length with prediction horizon.
-- Phase control keeps positive event-relative windows, learns the observation-to-track-end distance distribution from **positive training windows only**, and resamples feasible negative windows from it. That distance is a **diagnostic**, not a model input. The clean IDD-PeD reference is the earlier of the supplied crossing point and first annotated crossing frame.
-- The quantitative models use box coordinates in original image coordinates and frame-aligned ego speed: **16 × 5** box-plus-speed versus **16 × 4** box-only. Compute channel standardization on training data and apply it unchanged to validation/test data. Appearance, pose, and scene semantics are not quantitative model inputs. JAAD lacks the synchronized ego-speed channel needed for the five-dimensional comparison.
-- Main PIE sample counts are **4,906** event-anchored windows (**2,178 / 634 / 2,094** train/validation/test) and **4,520** phase-matched windows (**2,084 / 563 / 1,873**). Experiments ran on an Apple M4 MacBook Air CPU. Consult the manuscript for further setup details.
-- Training uses Adam, binary cross-entropy, batch size **32**, at most **100** epochs, and early stopping after **15** epochs without validation-AUC improvement. Seeds are **42, 0, 1, 2, 3**. Select checkpoints and F1-maximizing thresholds using validation data. Report ROC-AUC, PR-AUC, F1, and descriptive accuracy. Inference uses **10,000 pedestrian-clustered bootstrap** replicates and Holm–Bonferroni correction at α = **0.05**. Tables report means and standard deviations across seed runs; statistical contrasts use probabilities averaged across those runs. Keep these summaries distinct.
-- In the **audited extraction procedures**, positive-window contamination is **67.9%** for historical PIE, **93.0%** for naive JAAD, and **81.3%** for track-end IDD-PeD. Corrected PIE and JAAD sets have **0.0% observed contamination**. Direct IDD-PeD `crossing_point` leaves **29.6%** of positives contaminated; the earlier event/onset reference gives **0.0%**. These values do not describe all published uses of those datasets.
-- Under event anchoring, vanilla RNN has the highest five-seed mean ROC-AUC (**0.9481 ± 0.0058**), F1 (**0.8487 ± 0.0154**), and accuracy; Transformer has the highest mean PR-AUC (**0.8964 ± 0.0188**). **7/18** architecture–metric contrasts survive Holm correction. There is no statistically supported Transformer–vanilla RNN difference for the tested AUC, PR-AUC, or F1 contrasts. No single family leads every metric.
-- Observation-to-track-end distance alone gives diagnostic AUC **1.0000** under event anchoring. Phase matching reduces it to **0.7919** across the full dataset and **0.8241** on the test split. The timing separation is reduced, **not eliminated**. This diagnostic AUC is not a neural prediction score.
-- After phase matching, all four full-input models have lower five-seed mean performance on every reported metric. Corrected architecture contrasts change from **7/18** to **0/18**. Lack of a supported difference does not prove equivalence; eligible populations also differ between protocols.
-- Five-seed mean PR-AUC deltas (box-plus-speed minus box-only) under event anchoring / phase matching are **BiLSTM +0.2189 / −0.0206; vanilla RNN +0.1527 / −0.0188; GRU +0.1217 / +0.0049; Transformer +0.0565 / −0.0006**. Use the manuscript's deltas based on unrounded values. Inferentially, **10/12** input contrasts survive correction under event anchoring and **0/12** after phase matching across ROC-AUC, PR-AUC, and F1. The supported conclusion is that the measured contribution of speed depends on temporal sampling; it is not evidence that speed is useless or that removing it improves prediction.
-- Figure 7 is a **qualitative** detector-to-prediction demonstration. Its speed association is not a separate benchmark score, causal finding, safety-system validation, or deployment claim.
-- Event-relative prediction is established prior work. Present this study's contribution as auditing generated windows and testing sensitivity to the sampling protocol; do not claim a new state-of-the-art architecture or that the study invented event anchoring.
-- Limitations include the PIE-only controlled phase comparison, incomplete timing alignment, changed eligible populations and possibly box scale, restricted inputs, observed crossing outcome rather than latent intention, and exploratory IDD-PeD transfer. Do not imply universal generalization or successful external transfer.
+Retain the template’s course field:
 
-## Production workflow and deliverables
+**Course Code: Thesis CSC 488**
 
-1. **Plan.** Before authoring slides, write `presentation/presentation_plan.md`. For each slide, record its purpose, key message, source figure/table/section, proposed composition, and speaker-note emphasis. Define the typography, palette, grid, and figure treatment. Confirm the slide count and content coverage.
-2. **Build.** Use the tools available in your environment to produce a real, editable PowerPoint. Add useful speaker notes. Keep source/build files needed to revise the deck. Preserve the supplied manuscript files.
-3. **Export and inspect.** Export a matching PDF. Render or inspect **every slide** at normal presentation size. Check readability, hierarchy, alignment, figure completeness, legends, citations, exact numbers, and scientific interpretation. Correct problems, export again, and review the changed slides.
-4. **Final audit.** Confirm slides 1–5, the methods process-before-figure sequence, every core result, the 20–25 slide limit, and identical PPTX/PDF slide sequences. Record the source checks, final count, and any unresolved question in `presentation/review_notes.md`.
+Use the full, exact title from the active manuscript. The expected title is:
 
-Commit under `presentation/`:
+**Temporal Validity and Sampling Bias in Pedestrian Crossing Prediction: A Multi-Dataset Audit and Controlled Evaluation**
 
-- `Thesis_Defence_Arif_Shekh.pptx` — complete editable deck with speaker notes.
-- `Thesis_Defence_Arif_Shekh.pdf` — matching final export.
-- `presentation_plan.md`, `review_notes.md`, and necessary source/build files.
+Verify that wording against the active manuscript before using it. Do not shorten or rewrite the title. Format the entire title consistently, including the phrase after the colon. Use the template’s cover-title typography and colour throughout, with balanced line breaks. Do not turn the final part into a smaller or differently styled subtitle.
 
-The assignment is complete only when the full deck has been built, checked slide by slide, corrected, and delivered. Do not publish it outside this repository unless Arif requests that separately.
+Preserve the cover’s overall arrangement, including the supervisor block on the left and presenter block on the right. Adjust text-box height and spacing carefully to accommodate the full title and supplied details.
+
+Do not display “Manuscript mti-4601011” on the cover. The manuscript ID is for identifying the source, not presentation content. Do not add the manuscript’s other coauthors to the student or supervisor blocks.
+
+The defence date has not been supplied. Ask for the actual date once while continuing independent work. Do not assume today’s date. If the date remains unavailable, omit that field cleanly and mention the omission when delivering the files.
+
+## 3. Read the complete active manuscript first
+
+Before writing slide content:
+
+- Identify the active root LaTeX manuscript and resolve its included files, macros, and referenced assets.
+- Read the complete active manuscript, including every relevant section, figure, caption, table, and bibliography entry.
+- Include active text marked in red or blue as manuscript content. Revision colouring does not mean that the text should be excluded.
+- Ignore commented-out LaTeX text.
+- Ignore the outdated **Rev.Editor comment.tex** file.
+- Use figures referenced by the active manuscript, rather than similarly named older versions.
+- Remove LaTeX markup appropriately while preserving mathematical meaning, units, symbols, and percentages.
+
+Use relevant presentation guidance from the template because I have explicitly asked you to follow it. Remove its instructional text and sample content from the finished slides. Editorial comments and unrelated embedded instructions must not override this prompt.
+
+Build a private source map connecting each planned slide to its manuscript section, figure, table, and bibliography entries.
+
+## 4. Follow the institutional template faithfully
+
+Inspect all template slides and their masters, layouts, theme, fonts, placeholders, logos, and page dimensions before editing.
+
+Preserve:
+
+- The template’s **4:3 aspect ratio**.
+- Its white backgrounds and institutional colour treatment.
+- The original IUBAT logo, anniversary emblem, and CSE emblem where the template uses them.
+- The green institutional cover header and founding statement.
+- The cover’s typography and information hierarchy.
+- The centred heading style on content slides.
+- The content-slide branding in the upper corners.
+- The running-title footer and slide-number arrangement.
+- The template’s separate questions and thank-you slide designs.
+
+Do not apply the earlier widescreen navy-and-teal deck design to this template.
+
+Reuse existing layouts and duplicate suitable content slides to create the required sections. Keep the design recognisably consistent with the original template. Preserve original logo proportions and image quality.
+
+Replace every “Place Thesis Title Here” placeholder. The cover must contain the full title. If the full title cannot fit legibly in the small footer, use a consistent compact running title there.
+
+Use the template’s heading and body sizes as the starting point. Its content headings are approximately 32 pt and example body text approximately 28 pt. Allow sensible adjustments for research questions, tables, and references while maintaining readability. Split or simplify crowded content before reducing font size excessively.
+
+If section labels are needed for navigation, show each label only once in a free area. Do not cover the institutional logos or duplicate the same section information in multiple corners.
+
+Do not introduce stock images, decorative illustrations, unnecessary animations, unrelated colours, or a new theme.
+
+## 5. Presentation length and section order
+
+Target a **15–20-minute defence**, with **20–25 total slides**, including:
+
+- Cover
+- Contents
+- Main presentation
+- References
+- Questions
+- Thank you
+
+**Do not include backup slides.** Remove the template’s backup-slide instruction page.
+
+Follow the section names and order in the template’s Contents slide:
+
+1. Introduction
+2. Literature Review
+3. Research Methodology
+4. Result and Discussion
+5. Conclusion
+6. References
+
+Then retain separate questions and thank-you slides.
+
+Use the following as a starting allocation. Refine it after reading the manuscript without exceeding 25 slides or sacrificing essential evidence:
+
+| Slides | Purpose |
+|---|---|
+| 1 | Institutional cover with the full title and supplied personal details |
+| 2 | Contents using the template’s section order |
+| 3–6 | Introduction, including context, problem, aim, objectives, research questions, and contributions |
+| 7–9 | Literature Review |
+| 10–16 | Research Methodology and experimental settings |
+| 17–20 | Principal results with discussion of each finding |
+| 21 | Conclusion, including concise limitations and future directions |
+| 22–23 | Harvard-format references, using one or two slides as needed |
+| 24 | Questions |
+| 25 | Thank you |
+
+This allocation is a planning guide. Make necessary adjustments for readability. Integrate interpretation into the results slides so that “Result and Discussion” contains both evidence and its meaning.
+
+Use the manuscript’s final Introduction paragraph to inform the presentation roadmap. Do not paste that paragraph onto a slide.
+
+## 6. Introduction requirements
+
+Explain the research in clear, scholarly English that an examiner can understand on first reading.
+
+Cover:
+
+- Pedestrian safety and the need to predict crossing before it begins.
+- The distinction between predicting a future crossing action and observing an action already underway.
+- The problem of crossing frames appearing in generated observation windows.
+- The remaining difference in observation timing between crossing and non-crossing classes.
+- The research aim, objectives, questions, and contributions.
+- Why temporal validity and sampling bias are the central contributions.
+
+Use the original safety-context figure where useful. Clearly identify those statistics as contextual information cited by the manuscript.
+
+Check the research questions against the active manuscript. Preserve their full meaning and preferably their exact wording. The expected questions are:
+
+1. **Are the generated observation windows temporally valid when checked directly against frame-level crossing onset, and does the same conclusion hold across PIE, JAAD, and IDD-PeD?**
+2. **After direct crossing-frame contamination is removed, does class-dependent temporal sampling remain, and how does controlling this sampling phase affect model performance and the contribution of ego-vehicle speed?**
+3. **Do the relative performance differences among BiLSTM, GRU, vanilla RNN, and Transformer models remain consistent under different temporal sampling protocols?**
+
+Do not remove the question about residual class-dependent sampling. Do not replace the four named model families with a vague reference to “different models.”
+
+## 7. Literature Review requirements
+
+Create approximately three clear literature-review slides. Organise them around:
+
+1. **Datasets, benchmark construction, and prediction timing**
+2. **Model inputs and the reported contribution of ego-vehicle speed**
+3. **Controlled model comparison, evaluation reliability, and generalisation**
+
+For each slide, explain:
+
+- Which relevant studies addressed the topic.
+- What those studies contributed or found.
+- What question remained unresolved.
+- How that gap motivates this thesis.
+
+Use concrete descriptions of datasets and input modalities. For example, distinguish multimodal approaches from bounding-box-only approaches and bounding boxes with ego-vehicle speed.
+
+Explain that prior work already established the principle of pre-event prediction. The contribution here concerns verifying actual generated frames and evaluating residual temporal sampling effects.
+
+Do not present published scores from studies with different inputs or training procedures as a controlled architecture comparison.
+
+Where the manuscript cites broader machine-learning studies about tuning or run variability, identify their scope accurately. Do not imply that those studies were pedestrian-crossing experiments.
+
+Use concise author–year citations. Avoid vague summaries, unexplained acronyms, and crowded literature tables.
+
+## 8. Methodology requirements
+
+Present the methodology in a logical sequence.
+
+**Full pipeline**
+
+Begin with the complete original pipeline figure, **Figure 2**. Include the whole figure at readable resolution. Do not use only its lower half.
+
+**Datasets and data partitioning**
+
+Use two slides where feasible:
+
+- A process slide explaining the dataset roles, labels, exclusions, recording-level partitions, and window generation.
+- A figure slide using the original dataset illustration associated with subsection 3.1, **Figure 3** (`manuscript/figures/fig7_scenes.png`).
+
+Verify figure numbering against the active manuscript. The dataset image filename contains `fig7`, but it is **Figure 3** in `final.tex`.
+
+Clearly distinguish:
+
+- **PIE:** primary controlled model experiments.
+- **JAAD:** external temporal audit.
+- **IDD-PeD:** external temporal audit and exploratory external evaluation.
+
+**Temporal extraction and phase matching**
+
+Use a process slide first, followed by the complete **Figure 4** (`manuscript/figures/fig3_anchors.pdf`), including both panels.
+
+Explain:
+
+- Track-end extraction and its temporal-validity problem.
+- Event anchoring using the annotated crossing event.
+- Direct checking of observation frames against crossing annotations.
+- Residual class-dependent observation timing after event anchoring.
+- Phase matching based on the training-positive timing distribution.
+- Earlier negative sampling while preserving the intended observation structure.
+
+Explicitly state:
+
+**The track-end timing diagnostic was used to analyse and guide sampling. It was never a model input.**
+
+**Inputs and prediction models**
+
+Explain the manuscript’s input representation, preprocessing, speed ablation, and four model families. Verify recurrent directionality and architecture details against the Methods section.
+
+**Experimental settings**
+
+Include a dedicated, readable experimental-settings slide covering training, validation-based selection, random seeds, metrics, bootstrap analysis, and multiple-comparison correction.
+
+Verify all extraction settings, split counts, training details, and model-selection rules against the manuscript. Do not invent missing hyperparameters.
+
+## 9. Scientific accuracy and statistical reporting
+
+Preserve the exact meaning, comparison setting, and reporting basis of every result.
+
+In particular:
+
+- Distinguish the **three-dataset temporal audit** from the **controlled PIE experiments**.
+- Distinguish the observed crossing outcome from latent intention or a separate intention-probability annotation.
+- Distinguish **five-seed mean ± standard deviation** from metrics computed using **five-seed probability ensembles**.
+- Distinguish per-seed variability from bootstrap confidence intervals.
+- Explain the pedestrian-level dependence of multiple observation windows.
+- Preserve the manuscript’s **10,000 pedestrian-clustered bootstrap replicates**, **95% confidence intervals**, and fixed-model evaluation setting.
+- Preserve paired comparisons within a shared protocol and the manuscript’s appropriate treatment of comparisons across protocols.
+- Preserve the predefined Holm–Bonferroni comparison families, including the **18 architecture contrasts** and **12 speed-ablation contrasts**, with **α = 0.05**.
+- Do not silently include accuracy in a corrected comparison family where the manuscript excludes it.
+
+Use these manuscript-specific values as cross-checks, verifying them directly before reporting:
+
+- Initial positive-window contamination: **67.9% on PIE, 93.0% on JAAD, and 81.3% on IDD-PeD**.
+- IDD-PeD crossing-point anchoring still leaves **29.6%** contamination before the earlier-point/onset correction.
+- Architecture contrasts supported after correction: **7/18 before phase control and 0/18 after phase control**.
+- Speed-ablation contrasts supported after correction: **10/12 before phase control and 0/12 after phase control**.
+
+The last two statements concern supported statistical comparisons, not zero prediction performance.
+
+For any speed-gain chart, preserve the sign of each gain and identify it as **box-plus-speed minus box-only** under the stated protocol. Verify the numerical values and model order against the source tables.
+
+Do not interpret statistical non-significance as proof of equivalence. Do not conclude that ego-vehicle speed is universally irrelevant or that the model families are identical.
+
+Explain the supported conclusion: the measured speed contribution and architecture differences are sensitive to the temporal sampling protocol in the controlled PIE setting.
+
+If including the detection/tracking demonstration, keep it qualitative. State that the manuscript does not clearly establish the demonstration predictor’s model family or sampling protocol. Do not assume it matches the controlled experiments. Omit the demonstration if it would displace more important evidence or overcrowd the deck.
+
+If supplied numerical cross-checks conflict with the active manuscript, investigate the discrepancy and report it. Never alter source data to force agreement.
+
+## 10. Figures, tables, and slide writing
+
+Reuse original scientific figures at readable resolution.
+
+- Preserve complete Figure 2, the full dataset Figure 3, and both panels of the temporal-sampling Figure 4.
+- Preserve image proportions and meaningful labels.
+- Do not crop away evidence or stretch figures.
+- Use clear captions and source references.
+- Select other original figures according to their value to the defence narrative.
+- Recreate a chart only when its numerical data are available.
+- Keep recreated charts, text, and tables editable in PowerPoint.
+- Do not approximate data from a plotted image when underlying values are unavailable.
+
+Give each slide one clear purpose. Use informative topic titles for methods and evidence-supported takeaway titles for results.
+
+Prefer short statements and focused bullets over paragraphs. Explain necessary terminology. Avoid unsupported claims, repetitive headings, excessive bolding, and decorative text.
+
+Keep essential evidence visible on slides. Use speaker notes for additional detail rather than filling slides with small text.
+
+## 11. Conclusion, references, and closing slides
+
+The conclusion must briefly connect:
+
+- The research problem and objectives.
+- The main methodological contribution.
+- The principal findings.
+- Their interpretation.
+- Important limitations.
+- Specific future directions supported by the manuscript.
+
+Clearly acknowledge that controlled phase matching covers PIE and that external IDD-PeD findings remain exploratory. Mention residual temporal separation and other relevant limitations without overstating what the controls eliminate.
+
+For References:
+
+- Follow the template’s **Harvard referencing format**.
+- Use actual bibliography entries from the manuscript.
+- Replace all sample Arduino, IoT, and smart-home references.
+- Remove instructional lines and the template’s supervisor-consultation reminder from the finished slides.
+- Include readable references for the sources cited in the main presentation.
+- Use two reference slides when necessary.
+
+Preserve separate **questions** and **thank-you** slides in the template’s closing style. Keep them minimal. Do not add the previous topic list, methodological keywords, or unnecessary paragraphs.
+
+## 12. Workflow, notes, verification, and delivery
+
+First present a concise plan containing:
+
+- Proposed slide sequence and section allocation.
+- Source sections, figures, and tables for each slide.
+- Important scientific distinctions to preserve.
+- Estimated speaking time.
+
+Then proceed with creation. Ask only for genuinely missing information that affects the final result. Continue useful independent work while awaiting any answer.
+
+Add speaker notes to every substantive slide explaining:
+
+- What to say.
+- How to interpret the evidence.
+- Important qualifications.
+- The transition to the next slide.
+- Relevant source references.
+
+Before delivery:
+
+1. Verify every reported numerical value against the active manuscript.
+2. Verify research-question wording, dataset roles, sampling settings, seed reporting, and statistical claims.
+3. Confirm that the template’s dimensions, branding, typography, and layout conventions remain intact.
+4. Confirm that all placeholders, sample references, instructional text, and backup pages have been removed.
+5. Render every slide from the final PowerPoint.
+6. Inspect each slide individually for clipping, overlap, unreadable labels, excessive density, broken symbols, and poor spacing.
+7. Compare representative final slides with the original template, including the cover, content, references, and closing slides.
+8. Correct problems and render again.
+9. Confirm that text, tables, and recreated charts remain editable.
+10. Confirm that the PDF matches the final PowerPoint and that all original files remain unchanged.
+
+Save the finished work under `presentation/` in this repository. Deliver:
+
+- **An editable PowerPoint (.pptx) built from the institutional template.**
+- **A matching PDF.**
+- **Speaker notes embedded in the PowerPoint.**
+- A concise delivery message stating the slide count and any genuine unresolved limitations.
+
+Do not stop at a plan, an outline, screenshots, or a web presentation link. Deliver the completed, checked files. Do not claim perfect template fidelity or native PowerPoint verification unless you have actually verified it.
