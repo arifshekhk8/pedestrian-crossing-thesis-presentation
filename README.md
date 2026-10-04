@@ -10,9 +10,9 @@ The active manuscript title is in [manuscript/final.tex](manuscript/final.tex). 
 
 ## Start here
 
-Rezwoan, follow [PRESENTATION_PROMPT.md](PRESENTATION_PROMPT.md). It contains the required 25-slide plan, source figure mapping, scientific accuracy rules, white-background research styling, and the final review checklist.
+Rezwoan, use [PRESENTATION_PROMPT.md](PRESENTATION_PROMPT.md) as the assignment for Claude Code. It directs Claude Code to act as a professional academic presentation designer and build the finished deck from the manuscript. The brief includes the research narrative, suggested slide structure, source figure map, scientific accuracy rules, design direction, and final review steps.
 
-Create the full editable thesis defence deck and matching PDF. First write a plan, follow it, and recheck every slide. Place the finished deck, plan, and review notes under presentation/.
+Claude Code should create the full editable thesis defence deck and matching PDF, first writing a plan and then checking every slide. Place the finished deck, plan, and review notes under presentation/.
 
 ## Contents
 
